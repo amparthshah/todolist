@@ -1,0 +1,25 @@
+{% extends 'ToDoApp/base.html' %}
+
+
+{% block title %}
+Delete Task
+{% endblock title %}
+
+
+{% block main-content %}
+
+<div class="header-bar">
+    <a href="{% url 'tasks' %}">&#8592; Back</a>
+</div>
+
+<div class="card-body">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <h5>Are You Sure You Want To Delete This Task ? "{{task}}"</h5>
+        <input type="submit" class="button" value="Delete">
+    </form>
+</div>
+
+
+
+{% endblock main-content %}
