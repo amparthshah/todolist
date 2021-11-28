@@ -11,8 +11,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormVi
 from django.urls import reverse_lazy
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, PasswordResetForm
+from django.contrib.auth.views import PasswordChangeView, PasswordResetView
 
 # Create your views here.
 
@@ -44,7 +44,10 @@ class RegisterPage(FormView):
         return super(RegisterPage, self).get(*args, **kwargs)
         
 
-
+class PasswordsChangeView(PasswordChangeView):
+    template_name = 'ToDoApp/changepassword.html'
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('logout')
 
 
 class TaskList(LoginRequiredMixin, ListView):
@@ -70,6 +73,7 @@ class TaskDetail(LoginRequiredMixin, DetailView):
     model = Task
     template_name = 'ToDoApp/task.html'
     context_object_name = 'task'
+
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
